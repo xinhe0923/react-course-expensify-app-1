@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render expenselist item with empty message 1`] = `
+<div>
+  <Connect(ExpenseListFilters) />
+  <Connect(ExpenseList) />
+</div>
+`;

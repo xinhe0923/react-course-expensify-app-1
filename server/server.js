@@ -3,7 +3,7 @@ const path=require('path')
 const express=require('express')
 const app=express()
 const publicPath=path.join(__dirname,'..','public')
-const port= portprocess.env.PORT || 3000
+const port= process.env.PORT || 3000
 
 app.use(express.static(publicPath));//register middleware
 //express will serve ull all assets in the public path

@@ -15,7 +15,6 @@ import getVisibleExpenses from "./selectors/expenses";
 const store = configurStore();
 
 
-
 // store.dispatch(setTextFilter('water'))
 
 // store.dispatch(setTextFilter('age'))

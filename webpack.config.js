@@ -7,7 +7,7 @@ module.exports = (env) => {
   return {
     entry: "./src/app.js",
     output: {
-      path: path.join(__dirname, "public"), //absolute path
+      path: path.join(__dirname, "public","dist"), //absolute path
       filename: "bundle.js",
     },
     module: {
@@ -46,6 +46,7 @@ module.exports = (env) => {
     devServer: {
       contentBase: path.join(__dirname, "public"),
       historyApiFallback: true,
+      publicPath: '/dist/'
     },
     //webpack configuration
     //webpack grab the file and run it

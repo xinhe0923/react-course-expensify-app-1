@@ -152,7 +152,7 @@ export {firebase, database as default}
 // });;
 
 // database
-//   .ref("isSingle")
+//   .ref("expenses/-MBMkZfb0d1PEdcDDiZB")
 //   .remove()
 //   .then(() => {
 //     console.log("Remove succeeded.");

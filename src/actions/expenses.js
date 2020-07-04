@@ -1,6 +1,6 @@
 import uuid from "uuid";
 import database from "../firebase/firebase";
-import expenses from '../tests/fixtures/expenses'
+import expenses from "../tests/fixtures/expenses";
 //component calls option operator
 //action generator return object
 //component dispatches object
@@ -52,6 +52,17 @@ export const removeExpense = ({ id } = {}) => ({
   id,
 });
 
+export const startRemoveExpense = ({ id } = {}) => {
+  return (dispatch) => {
+    return database
+      .ref(`expenses/${id}`)
+      .remove()
+      .then(() => {
+        dispatch(removeExpense({id})); //by return this we can toss on then to chain on in test file
+      });
+  };
+};
+
 export const editExpense = (id, updates) => ({
   type: "EDIT_EXPENSE",
   id,
@@ -64,25 +75,21 @@ export const setExpenses = (expenses) => ({
   expenses,
 }); //change redux store
 
-
-
 export const startSetExpenses = () => {
   return (dispatch) => {
-  return database.ref("expenses")
-  .once("value")
-  .then((snapshot) => {
-    const expenses = [];
-    snapshot.forEach((childSnapshot) => {
-      expenses.push({
-        id: childSnapshot.key,
-        ...childSnapshot.val(),
+    return database
+      .ref("expenses")
+      .once("value")
+      .then((snapshot) => {
+        const expenses = [];
+        snapshot.forEach((childSnapshot) => {
+          expenses.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val(),
+          });
+        });
+        dispatch(setExpenses(expenses));
       });
-    });
-    dispatch(
-      setExpenses(expenses)
-    )
-  })
-
-  }
-}
+  };
+};
 // export const startSetExpenses;//fetch to firebase

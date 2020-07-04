@@ -1,6 +1,6 @@
 import uuid from "uuid";
 import database from "../firebase/firebase";
-
+import expenses from '../tests/fixtures/expenses'
 //component calls option operator
 //action generator return object
 //component dispatches object
@@ -27,6 +27,7 @@ export const startAddExpense = (expenseData = {}) => {
       amount,
       createdAt,
     };
+
     return database
       .ref("expenses")
       .push(expense)
@@ -36,7 +37,7 @@ export const startAddExpense = (expenseData = {}) => {
             id: ref.key,
             ...expense,
           })
-        );//by return this we can toss on then to chain on in test file
+        ); //by return this we can toss on then to chain on in test file
       });
     //this function gets called internally be redux
     //gets called with dispatch
@@ -56,3 +57,32 @@ export const editExpense = (id, updates) => ({
   id,
   updates,
 });
+
+//SET_
+export const setExpenses = (expenses) => ({
+  type: "SET_EXPENSES",
+  expenses,
+}); //change redux store
+
+
+
+export const startSetExpenses = () => {
+  return (dispatch) => {
+  return database.ref("expenses")
+  .once("value")
+  .then((snapshot) => {
+    const expenses = [];
+    snapshot.forEach((childSnapshot) => {
+      expenses.push({
+        id: childSnapshot.key,
+        ...childSnapshot.val(),
+      });
+    });
+    dispatch(
+      setExpenses(expenses)
+    )
+  })
+
+  }
+}
+// export const startSetExpenses;//fetch to firebase

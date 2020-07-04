@@ -7,7 +7,7 @@ import "./styles/styles.scss";
 import AppRouter from "./routers/AppRouter";
 import configurStore from "./store/configureStore";
 import './firebase/firebase'
-import { addExpense } from "./actions/expenses";
+import { startSetExpenses } from "./actions/expenses";
 import { setTextFilter } from "./actions/filters";
 import getVisibleExpenses from "./selectors/expenses";
 // import './playground/promises'
@@ -33,4 +33,14 @@ const jsx = (
     {/*you can use this component nested inside of the provider*/}
   </Provider>
 );
-ReactDOM.render(jsx, document.getElementById("app"));
+
+// ReactDOM.render(jsx, document.getElementById("app"));
+
+ReactDOM.render(<p>loading...</p>, document.getElementById("app"));
+//render a loading message the sthe screen until we get data from firebase
+
+store.dispatch(startSetExpenses()).then(()=>{
+  ReactDOM.render(jsx, document.getElementById("app"));
+
+})
+//return a promise

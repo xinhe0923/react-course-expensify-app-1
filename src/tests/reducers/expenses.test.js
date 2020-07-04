@@ -1,6 +1,14 @@
 import expensesReducer from '../../reducers/expenses'
 import expenses from '../fixtures/expenses'
+import { setExpenses } from '../../actions/expenses'
 
+const originalExpense={
+    id:'123665',
+    description:'orignal',
+    note:'',
+    amount:100000,
+    createdAt:0
+}
 
 test('should set default state',()=>{
 const state=expensesReducer(undefined,{type:'@@INIT'})
@@ -62,3 +70,14 @@ test('should not edit if expense not found',()=>{
     expect(state).toEqual(expenses)
 
 })
+
+test('should set expenses',()=>{
+    const action={
+        type:'SET_EXPENSES',
+        expenses:[expenses[1]]
+    }
+    const state=expensesReducer(expenses,action)
+    expect(state).toEqual([expenses[1]])
+  })//expenses passed in should be set as state
+  //existed ones are gone
+  

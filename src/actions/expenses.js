@@ -58,7 +58,7 @@ export const startRemoveExpense = ({ id } = {}) => {
       .ref(`expenses/${id}`)
       .remove()
       .then(() => {
-        dispatch(removeExpense({id})); //by return this we can toss on then to chain on in test file
+        dispatch(removeExpense({ id })); //by return this we can toss on then to chain on in test file
       });
   };
 };
@@ -68,6 +68,19 @@ export const editExpense = (id, updates) => ({
   id,
   updates,
 });
+
+export const startEditExpense = (id, updates) => {
+  return (dispatch) => {
+    return database
+      .ref(`expenses/${id}`)
+      .update(
+        updates,
+      )
+      .then(() => {
+        dispatch(editExpense(id, updates)); //by return this we can toss on then to chain on in test file
+      });
+  };
+};
 
 //SET_
 export const setExpenses = (expenses) => ({

@@ -4,40 +4,52 @@ import { Provider } from "react-redux";
 import "normalize.css/normalize.css";
 import "react-dates/lib/css/_datepicker.css";
 import "./styles/styles.scss";
-import AppRouter from "./routers/AppRouter";
+import AppRouter, { history } from "./routers/AppRouter";
 import configurStore from "./store/configureStore";
 import "./firebase/firebase";
-import { startRemoveExpense, startSetExpenses } from "./actions/expenses";
-import { setTextFilter } from "./actions/filters";
-import getVisibleExpenses from "./selectors/expenses";
+import { firebase } from "./firebase/firebase";
+import { startSetExpenses } from "./actions/expenses";
+import { render } from "enzyme";
+import { login,logout } from "./actions/auth";
 // import './playground/promises'
 // import expenseReducer from './reducers/expenses'
 
 const store = configurStore();
 
-// store.dispatch(setTextFilter('water'))
-
-// store.dispatch(setTextFilter('age'))
-
-// console.log(visibleExpenses);
-
-// store.dispatch(setTextFilter('water'))
-// store.dispatch(getVisibleExpense())
-
 //normalize ensures all browser starts at the same base
 const jsx = (
   <Provider store={store}>
     <AppRouter />
-    {/*you can use this component nested inside of the provider*/}
   </Provider>
 );
 
+let hasRendered = false;
+const renderApp = () => {
+  if (!hasRendered) {
+    ReactDOM.render(jsx, document.getElementById("app"));
+    hasRendered = true;
+  }
+};
 // ReactDOM.render(jsx, document.getElementById("app"));
 
 ReactDOM.render(<p>loading...</p>, document.getElementById("app"));
-// // render a loading message the sthe screen until we get data from firebase
+// render a loading message the sthe screen until we get data from firebase
 
-store.dispatch(startSetExpenses()).then(() => {
-  ReactDOM.render(jsx, document.getElementById("app"));
-});
 //return a promise
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    store.dispatch(login(user.uid))
+    store.dispatch(startSetExpenses()).then(() => {
+      renderApp();
+      if(history.location.pathname==='/'){
+        history.push('/dashboard')//only do when they are on the login page
+      }
+    }); //
+  } else {
+    store.dispatch(logout())
+    renderApp();
+    history.push("/");
+  }
+}); //takes call back function, and
+// runs the call back function when the authentication status changed

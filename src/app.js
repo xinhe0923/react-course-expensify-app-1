@@ -7,6 +7,7 @@ import "./styles/styles.scss";
 import AppRouter, { history } from "./routers/AppRouter";
 import configurStore from "./store/configureStore";
 import "./firebase/firebase";
+import LoadingPage from './components/LoadingPage'
 import { firebase } from "./firebase/firebase";
 import { startSetExpenses } from "./actions/expenses";
 import { render } from "enzyme";
@@ -32,7 +33,7 @@ const renderApp = () => {
 };
 // ReactDOM.render(jsx, document.getElementById("app"));
 
-ReactDOM.render(<p>loading...</p>, document.getElementById("app"));
+ReactDOM.render(<LoadingPage/>, document.getElementById("app"));
 // render a loading message the sthe screen until we get data from firebase
 
 //return a promise

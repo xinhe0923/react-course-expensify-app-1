@@ -1,19 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should call startLogin on button lick 1`] = `
-<div>
-  <button
-    onClick={[Function]}
+<div
+  className="box-layout"
+>
+  <div
+    className="box-layout__box"
   >
-    Log in
-  </button>
+    <h1
+      className="box-layout_title"
+    >
+      Expensify
+    </h1>
+    <p>
+      It's time to get your expenses under control
+    </p>
+    <button
+      className="button"
+      onClick={[Function]}
+    >
+      Log in with Google
+    </button>
+  </div>
 </div>
 `;
 
 exports[`should render LogInPage 1`] = `
-<div>
-  <button>
-    Log in
-  </button>
+<div
+  className="box-layout"
+>
+  <div
+    className="box-layout__box"
+  >
+    <h1
+      className="box-layout_title"
+    >
+      Expensify
+    </h1>
+    <p>
+      It's time to get your expenses under control
+    </p>
+    <button
+      className="button"
+    >
+      Log in with Google
+    </button>
+  </div>
 </div>
 `;

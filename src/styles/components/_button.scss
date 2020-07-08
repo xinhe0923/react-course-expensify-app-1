@@ -1,0 +1,27 @@
+.button {
+  //   align-items: center;
+  background-color: $blue;
+  border: none;
+  font-weight: 300;
+  font-size: $font-size-large;
+  display: inline-block;//the vertical margin and padding
+  //get taken into effect
+  color: white;
+  line-height: 1;
+  padding: $s-size;
+text-decoration: none;
+  
+}
+
+.button__link-modifier{
+  background:none;
+  // border:none;
+  // padding:0;
+  // color:white;
+}
+
+.button__secondary{
+  background:#888;
+  
+
+}

@@ -2,8 +2,8 @@
 
 exports[`should render expenselist item with empty message 1`] = `
 <div>
+  <Connect(ExpensesSummary) />
   <Connect(ExpenseListFilters) />
   <Connect(ExpenseList) />
-  <Connect(ExpensesSummary) />
 </div>
 `;
